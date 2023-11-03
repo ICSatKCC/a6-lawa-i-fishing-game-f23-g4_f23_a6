@@ -6,7 +6,7 @@ import java.util.Random;
 * @author Justin Kugiyama
 * @since 9/21/23
 */
-public class Oama extends I_a implements ColorChangeable {
+public class Oama extends FishableI_a implements ColorChangeable {
    // Constants for 'Oama
    /** Constant reproductive mode for this fish. */
    static final String REPRODUCTIVE_MODE = "serial";
@@ -210,6 +210,61 @@ public class Oama extends I_a implements ColorChangeable {
       return new Oama(this.maxLength);
    }
    
+   //============= Required by Fishable ==================
+ /** 
+ * determines if the fish is legal to keep due to length.
+ * Baby size handles this for all Oama sizes.
+ * Oama has no minimum size restriction. 
+ * @return true If this fish is legal size to keep.
+ */
+   public boolean isLegalSize() {
+      return true;
+   }
+	       
+    /**
+    * determines if Oama can be used as a baitfish.
+    * @return false this fish type is not used for bait for other fishing.
+    */
+   public boolean isBait() {
+      return true;
+   }
+	       
+    /**
+    * determines if Oama can be used to eat.
+    * @return true if is legal size, false otherwise.
+    */
+   public boolean isGamefish() {
+      if (this.isLegalSize()) {
+         return true;
+      }
+      return false;
+   }
+   
+   /**
+   * Oama season is all year round.
+   * @param month the current month of the year.
+   * @return true if fish is okay to take, false otherwise.
+   */
+   public boolean isInSeason(String month) {
+      return true;
+   }
+	       
+    /**
+    * Returns the methods of catching this fish.
+    * @return an array of fishing methods.
+    */
+   public String[] getCatchMethods() {
+      String [] catchMethods = {"net", "trap", "pole"};
+      return catchMethods;
+   }
+   
+   /**
+   * Returns the limit on number of Oama you're allowed to catch.
+   * @return int representing the maximum number of Oama you are allowed.
+   */
+   public int getBagLimit() {
+      return 50;
+   }
    
 
    //******* required by the ColorChangeable interface ******
@@ -225,5 +280,6 @@ public class Oama extends I_a implements ColorChangeable {
    public void setColor(String bodyColor, String finColor) {
       this.bodyColor = bodyColor;
       this.finColor = finColor;
+      throw new UnsupportedOperationException("Oama cannot change color");
    }
 }  

@@ -1,17 +1,17 @@
 import java.util.Random;
 
 /**
-* 'Ama'ama family.
-* Smallest fish of 'Ama'ama family
+* 'Pua'ama family.
+* Smallest fish of 'Pua'ama family
 * @author Justin Kugiyama
 * @since 10/1/2023
 */
-public class Pua_ama extends I_a {
-   // Constants for 'Ama'ama family.
+public class Pua_ama extends FishableI_a {
+   // Constants for 'Pua'ama family.
    /** Constant reproductive mode for this fish. */
    static final String REPRODUCTIVE_MODE = "protoandrous";
    
-   /** Food 'Ama'ama family eats. */
+   /** Food 'Pua'ama family eats. */
    protected static final String [] DIET_ITEMS = {"zooplankton", "algae",
       "detritus", "invertebrates"};
    
@@ -160,6 +160,80 @@ public class Pua_ama extends I_a {
          this.length = newLen;
          this.weight = newLen * 2;
       }
+   }
+   
+   
+   //============= Required by Fishable ==================
+ /** 
+ * determines if the fish is legal to keep due to length.
+ * Baby size handles this for all Pua'ama sizes.
+ * Pua'ama must be 11 inches or more to take. 
+ * @return true If this fish is legal size to keep.
+ */
+   public boolean isLegalSize() {
+      if (this.length >= 11) {
+         return true;
+      } 
+      return false;
+   }
+	       
+    /**
+    * determines if Pua'ama can be used as a baitfish.
+    * @return false this fish type is not used for bait for other fishing.
+    */
+   public boolean isBait() {
+      return false;
+   }
+	       
+    /**
+    * determines if Pua'ama can be used to eat.
+    * @return true if is legal size, false otherwise.
+    */
+   public boolean isGamefish() {
+      if (this.isLegalSize()) {
+         return true;
+      }
+      return false;
+   }
+   
+   /**
+   * Pua'ama season is April - November. No catching December - March
+   * @param month the current month of the year.
+   * @return true if fish is okay to take, false otherwise.
+   */
+   public boolean isInSeason(String month) {
+      month = month.toLowerCase();
+      boolean isOk = true;
+      
+      switch(month) {
+         case "december":
+         case "january":
+         case "february":
+         case "march":
+            isOk = false;
+            break;
+         default:
+            isOk = true;
+            break;
+      }
+      return isOk;
+   }
+	       
+    /**
+    * Returns the methods of catching this fish.
+    * @return an array of fishing methods.
+    */
+   public String[] getCatchMethods() {
+      String [] catchMethods = {"net", "pole"};
+      return catchMethods;
+   }
+   
+   /**
+   * Returns the limit on number of Pua'ama you're allowed to catch.
+   * @return int representing the maximum number of Pua'ama you are allowed.
+   */
+   public int getBagLimit() {
+      return Integer.MAX_VALUE;
    }
    
    /**
