@@ -224,8 +224,14 @@ public class Pua_ama extends FishableI_a {
     * @return an array of fishing methods.
     */
    public String[] getCatchMethods() {
-      String [] catchMethods = {"net", "pole"};
-      return catchMethods;
+      if (sex != "none") {
+         String [] catchMethods = {"net", "pole"};
+         return catchMethods;
+      } else {
+         return null;
+      
+      }
+         
    }
    
    /**
