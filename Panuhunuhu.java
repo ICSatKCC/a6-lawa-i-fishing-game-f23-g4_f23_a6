@@ -100,5 +100,13 @@ public class Panuhunuhu extends Ohua {
       return new Uhu(this.maxLength);
    
    }
+    /**
+    * Returns the methods of catching this fish.
+    * @return an array of fishing methods.
+    */
+   public String[] getCatchMethods() {
+      return null;
+   }
+
 }
    

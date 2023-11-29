@@ -278,8 +278,8 @@ public class Oama extends FishableI_a implements ColorChangeable {
    * @throws UnsupportedOperationExchange always
    */
    public void setColor(String bodyColor, String finColor) {
-      this.bodyColor = bodyColor;
-      this.finColor = finColor;
+     //  this.bodyColor = bodyColor;
+//       this.finColor = finColor;
       throw new UnsupportedOperationException("Oama cannot change color");
    }
 }  

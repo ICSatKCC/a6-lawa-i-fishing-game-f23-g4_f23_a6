@@ -86,5 +86,9 @@ public class Weke_a extends Oama {
    public Weke_a levelUp() {
       return this;
    }
-   
+     public void setColor(String bodyColor, String finColor) {
+      this.bodyColor = bodyColor;
+      this.finColor = finColor;
+
+   }
 }

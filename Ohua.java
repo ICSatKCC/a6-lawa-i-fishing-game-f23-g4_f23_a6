@@ -6,13 +6,13 @@ import java.util.Random;
 * @author Yongjun Yu
 * @since 9/22/2023
 */
-public class Ohua extends I_a implements ColorChangeable, SexChangeable {
+public class Ohua extends FishableI_a implements ColorChangeable, SexChangeable {
    
    // Constants for this fish.
    /** constant reproductive mode for this Ia. */
-   protected static final String REPRODUCTIVE_MODE = "protogynous";
+   protected static final String REPRODUCTIVE_MODE = "protogynous";// if p it will false
    /** constant array of what the fish eats. */
-   protected static final String[] DIET_ITEMS = {"algae"};
+   protected static final String[] DIET_ITEMS = {"algae"};// if A it will false
    
    /** constant maximum length for this Ia. */
    private static final double OHUA_MAX_LENGTH = 4.0;
@@ -28,7 +28,7 @@ public class Ohua extends I_a implements ColorChangeable, SexChangeable {
    public Ohua() {
       super("'Ohua", "Parrotfish", "Scaridae", 
          OHUA_MAX_LENGTH, OHUA_MIN_LENGTH, 0.1, 2.0, DIET_ITEMS, "gray", 
-         "reddish gray", "none");   
+         "reddish gray", "none");    // if "gray' it will false
          //set random allowed length 
       this.initLength();
      
@@ -45,7 +45,7 @@ public class Ohua extends I_a implements ColorChangeable, SexChangeable {
       
       super("'Ohua", "Parrotfish", "Scaridae", 
          OHUA_MAX_LENGTH, OHUA_MIN_LENGTH, length, (length * 2), 
-         DIET_ITEMS, "gray", "reddish gray", "none");       
+         DIET_ITEMS, "gray", "reddish gray", "none");  // if "gray" it will false     
    
    }
     /** 
@@ -190,4 +190,71 @@ public class Ohua extends I_a implements ColorChangeable, SexChangeable {
    
    }
    
+//}
+ //============= Required by Fishable ==================
+ /** 
+ * determines if the fish is legal to keep due to length.
+ * Baby size handles this for all Moi sizes.
+ * Ohua must be 12 inches or more to take. 
+ * @return true If this fish is legal size to keep.
+ */
+   public boolean isLegalSize() {
+      if (this.length >= 12) {
+         return true;
+      } 
+      return false;
+   }
+	       
+    /**
+    * determines if Ohua can be used as a baitfish.
+    * @return false this fish type is not used for bait for other fishing.
+    */
+   public boolean isBait() {
+      return false;
+   }
+	       
+    /**
+    * determines if Ohua can be used to eat.
+    * @return true if is legal size, false otherwise.
+    */
+   public boolean isGamefish() {
+      if (this.isLegalSize()) {
+         return true;
+      }
+      return false;
+   }
+   
+   /**
+   * Ohua season is always open
+   * @param month the current month of the year.
+   * @return true if fish is okay to take, false otherwise.
+   */
+   public boolean isInSeason(String month) {
+           return true;
+   }
+	       
+    /**
+    * Returns the methods of catching this fish.
+    * @return an array of fishing methods.
+    */
+   public String[] getCatchMethods() {
+       if (sex != "none") {
+         String [] catchMethods = {"throw net", "pole", "spear"};
+         return catchMethods;
+      } else {
+         return null;
+      
+      }
+   }
+   
+   /**
+   * Returns the limit on number of Ohua you're allowed to catch.
+   * @return int representing the maximum number of Ohua you are allowed.
+   */
+   public int getBagLimit() {
+      return Integer.MAX_VALUE;
+   }   
+
 }
+   
+  

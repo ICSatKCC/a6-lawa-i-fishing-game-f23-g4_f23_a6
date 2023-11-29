@@ -123,5 +123,10 @@ public class Weke_ula extends Oama {
    public Weke_ula levelUp() {
       return this;
    }
+  public void setColor(String bodyColor, String finColor) {
+      this.bodyColor = bodyColor;
+      this.finColor = finColor;
+
+   }
 
 }

@@ -85,4 +85,8 @@ public class Kahaha extends Pua_ama {
       return new Ama_ama(this.maxLength, this.sex);
    }
       
+
+ public String[] getCatchMethods() {
+      return null;  // add get Catch Method
+   }
 }

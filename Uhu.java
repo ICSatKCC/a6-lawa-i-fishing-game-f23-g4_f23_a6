@@ -116,5 +116,19 @@ public class Uhu extends Panuhunuhu {
       return this;
    
    }
+    /**
+    * Returns the methods of catching this fish.
+    * @return an array of fishing methods.
+    */
+   public String[] getCatchMethods() {
+       if (sex != "none") {
+         String [] catchMethods = {"throw net", "pole", "spear"};
+         return catchMethods;
+      } else {
+         return null;
+      
+      }
+   }
+
 }
    

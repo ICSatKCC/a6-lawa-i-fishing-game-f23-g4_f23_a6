@@ -13,7 +13,7 @@ public class OhuaTest {
    /** constant reproductive mode for this Ia. */
    static final String REPRODUCTIVE_MODE = "protogynous";
    /** constant array of what the fish eats. */
-   static final String[] DIET_ITEMS = {"Algae"};
+   static final String[] DIET_ITEMS = {"algae"};
    /** constant maximum length for this Ia. */
    static final double MAX_LENGTH = 4.0;
    /** constant minimum length for this Ia. 
@@ -78,9 +78,9 @@ public class OhuaTest {
       Assert.assertTrue("Length is outside allowed limits for this fish. It is " + length 
             + " but should be between " + MIN_LENGTH + " and " + MAX_LENGTH, (length >= MIN_LENGTH && length < MAX_LENGTH));
 
-      Assert.assertEquals("Body color is not correct. It is " + bodColor + " but should be gray", "Gray", bodColor);
+      Assert.assertEquals("Body color is not correct. It is " + bodColor + " but should be gray", "gray", bodColor);
       Assert.assertTrue("Fin color is not correct. It is " + finColor + " but should be gray or reddish gray", 
-            (finColor.equalsIgnoreCase("Gray") || (finColor.equalsIgnoreCase("reddish gray") )));
+            (finColor.equalsIgnoreCase("gray") || (finColor.equalsIgnoreCase("reddish gray") )));
       Assert.assertTrue("Fish sex is not correct. It is " + sex + " but should be male or female or none", (sex.equalsIgnoreCase("male") || sex.equalsIgnoreCase("female")|| sex.equalsIgnoreCase("none")));
    
    }
@@ -153,7 +153,7 @@ public class OhuaTest {
    I_a a = new Ohua(1.0);
       double newLen = 0;
       double oldLen = a.getLength();
-      a.eat("Algae");
+      a.eat("algae");
       newLen = a.getLength();
       Assert.assertTrue("Fish does not grow bigger when eating. Start length: " + oldLen
             + ", End length: " + newLen, newLen > oldLen);
@@ -167,7 +167,7 @@ public class OhuaTest {
     I_a a = new Ohua(7.999);
     boolean tooBig = false;
     while(!tooBig) {
-      a.eat("Algae");
+      a.eat("algae");
     }
   }
   
@@ -180,7 +180,7 @@ public class OhuaTest {
     boolean tooBig = false;
     while(!tooBig) {
       try {
-         a.eat("Algae");
+         a.eat("algae");
       } catch (FishSizeException fse) {
          tooBig = true;
       }
@@ -262,7 +262,7 @@ public class OhuaTest {
   /** test getReproductiveMode method. */
       @Test public void getReproductiveModeTest() {
       SexChangeable a = new Ohua();
-      Assert.assertEquals("This fish should have protogynous reproductive mode", "Protogynous", a.getReproductiveMode());
+      Assert.assertEquals("This fish should have protogynous reproductive mode", "protogynous", a.getReproductiveMode());
   }
   
    //****************** Check for ColorChangeable Implementation ***********/
