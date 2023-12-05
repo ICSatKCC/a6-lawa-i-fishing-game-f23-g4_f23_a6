@@ -125,6 +125,7 @@ public class FishingFrenzyBash {
       int chosenFish = 0;
       boolean isCaught = false;
       boolean isLegal = false;
+      boolean method = false;
       int gameCount = 0;
       int playerTurn = 1;
       String userIn;
@@ -185,41 +186,50 @@ public class FishingFrenzyBash {
          
             userIn = scan.nextLine();
             userIn = userIn.trim();
-         
+            
+            
             switch(userIn) {
-               //user chose to cast out for a fish
+                  //user chose to cast out for a fish
                case "1":
-                  System.out.println("Pick your fishing method");
-                  System.out.println("a) pole");
-                  System.out.println("b) net");
-                  System.out.println("c) spear");
-                  System.out.println("d) trap");
-                  System.out.println("e) throw net");
+                  while (!method) {
+                     System.out.println("Pick your fishing method");
+                     System.out.println("a) pole");
+                     System.out.println("b) net");
+                     System.out.println("c) spear");
+                     System.out.println("d) trap");
+                     System.out.println("e) throw net");
                   
-                  userIn = scan.nextLine();
-                  userIn = userIn.trim().toUpperCase();
+                     userIn = scan.nextLine();
+                     userIn = userIn.trim().toUpperCase();
                   
-                  switch(userIn) {
-                     case "A":
-                        catchMethod = "pole";
-                        break;
-                     case "B":
-                        catchMethod = "net";
-                        break;
-                     case "C":
-                        catchMethod = "spear";
-                        break;
-                     case "D":
-                        catchMethod = "trap";
-                        break;
-                     case "E":
-                        catchMethod = "throw net";
-                        break;
-                     default:
-                        System.out.println("***INVALID INPUT***");
-                        System.out.println("Please choose a valid letter");
-                        break;
-                  }
+                     switch(userIn) {
+                        case "A":
+                           catchMethod = "pole";
+                           method = true;
+                           break;
+                        case "B":
+                           catchMethod = "net";
+                           method = true;
+                           break;
+                        case "C":
+                           catchMethod = "spear";
+                           method = true;
+                           break;
+                        case "D":
+                           catchMethod = "trap";
+                           method = true;
+                           break;
+                        case "E":
+                           catchMethod = "throw net";
+                           method = true;
+                           break;
+                        default:
+                           System.out.println("***INVALID INPUT***");
+                           System.out.println("Please choose a valid letter");
+                           break;
+                     }
+                  
+                  } //end while loop
                   
                   chosenFish = ranGen.nextInt(POND_SIZE);
                   try {
