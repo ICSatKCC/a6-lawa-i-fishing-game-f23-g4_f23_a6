@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Collections;
 
 /**
 * Fishing Frenzy Bash.
@@ -127,6 +128,8 @@ public class FishingFrenzyBash {
       boolean isCaught = false;
       boolean isLegal = false;
       boolean method = false;
+      boolean player1 = false;
+      boolean player2 = false;
       int gameCount = 0;
       int playerTurn = 1;
       String userIn;
@@ -179,268 +182,279 @@ public class FishingFrenzyBash {
          System.out.println(month);
          
          for (int j = 0; j < 3; j++) {
-            System.out.println("* Player 1 Choose:");
-            System.out.println("1. Cast out for a fish");
-            System.out.println("2. View fishing rules");
-            System.out.println("3. View sack of fish");
-            System.out.println("4. Throw back a fish in the sack");
-         
-            userIn = scan.nextLine();
-            userIn = userIn.trim();
+            while (!player1) {
+               System.out.println("* Player 1 Choose:");
+               System.out.println("1. Cast out for a fish");
+               System.out.println("2. View fishing rules");
+               System.out.println("3. View sack of fish");
+               System.out.println("4. Throw back a fish in the sack");
+            
+               userIn = scan.nextLine();
+               userIn = userIn.trim();
             
             
-            switch(userIn) {
+               switch(userIn) {
                   //user chose to cast out for a fish
-               case "1":
-                  while (!method) {
-                     System.out.println("Pick your fishing method");
-                     System.out.println("a) pole");
-                     System.out.println("b) net");
-                     System.out.println("c) spear");
-                     System.out.println("d) trap");
-                     System.out.println("e) throw net");
-                  
-                     userIn = scan.nextLine();
-                     userIn = userIn.trim().toUpperCase();
-                  
-                     switch(userIn) {
-                        case "A":
-                           catchMethod = "pole";
-                           method = true;
-                           break;
-                        case "B":
-                           catchMethod = "net";
-                           method = true;
-                           break;
-                        case "C":
-                           catchMethod = "spear";
-                           method = true;
-                           break;
-                        case "D":
-                           catchMethod = "trap";
-                           method = true;
-                           break;
-                        case "E":
-                           catchMethod = "throw net";
-                           method = true;
-                           break;
-                        default:
-                           System.out.println("***INVALID INPUT***");
-                           System.out.println("Please choose a valid letter");
-                           break;
-                     }
+                  case "1":
+                     while (!method) {
+                        System.out.println("Pick your fishing method");
+                        System.out.println("a) pole");
+                        System.out.println("b) net");
+                        System.out.println("c) spear");
+                        System.out.println("d) trap");
+                        System.out.println("e) throw net");
                      
-                  } //end while loop
-                  
-                  chosenFish = ranGen.nextInt(POND_SIZE);
-                  try {
-                     ia = fishPond.get(chosenFish);
-                  
-                     System.out.println("You have hooked a fish!");
-                     //randomly caught or not
-                     isCaught = ranGen.nextBoolean();
-                     if (isCaught) {
-                        System.out.println("You have caught a fish!");
-                        System.out.println(ia);
-                        System.out.println("Do you wish to keep your fish y/n");
                         userIn = scan.nextLine();
                         userIn = userIn.trim().toUpperCase();
+                     
                         switch(userIn) {
-                           case "Y":      
-                              System.out.println("You have kept your fish");
-                              if (ia.isLegalSize()) {
-                                 System.out.println("Your fish is legal");
-                                 userSack1.add(ia);
-                                 fishPond.remove(chosenFish); //take fish out of the pond
-                              } else {
-                                 System.out.println("You kept an illegal fish!");
-                                 System.out.println("You got a ticket and all of " 
-                                     + "your fish were confiscated!");
-                              }
+                           case "A":
+                              catchMethod = "pole";
+                              method = true;
                               break;
-                           case "N":
-                              System.out.println("You released your fish");
+                           case "B":
+                              catchMethod = "net";
+                              method = true;
+                              break;
+                           case "C":
+                              catchMethod = "spear";
+                              method = true;
+                              break;
+                           case "D":
+                              catchMethod = "trap";
+                              method = true;
+                              break;
+                           case "E":
+                              catchMethod = "throw net";
+                              method = true;
                               break;
                            default:
                               System.out.println("***INVALID INPUT***");
-                              System.out.println("Please enter a y or n");
+                              System.out.println("Please choose a valid letter");
                               break;
                         }
-                     } else {
-                        System.out.println("Your fish got away!");
+                     
+                     } //end while loop
+                  
+                     chosenFish = ranGen.nextInt(POND_SIZE);
+                     try {
+                        ia = fishPond.get(chosenFish);
+                     
+                        System.out.println("You have hooked a fish!");
+                     //randomly caught or not
+                        isCaught = ranGen.nextBoolean();
+                        if (isCaught) {
+                           System.out.println("You have caught a fish!");
+                           System.out.println(ia);
+                           System.out.println("Do you wish to keep your fish y/n");
+                           userIn = scan.nextLine();
+                           userIn = userIn.trim().toUpperCase();
+                           switch(userIn) {
+                              case "Y":      
+                                 System.out.println("You have kept your fish");
+                                 if (ia.isLegalSize()) {
+                                    System.out.println("Your fish is legal");
+                                    userSack1.add(ia);
+                                    fishPond.remove(chosenFish); //take fish out of the pond
+                                 } else {
+                                    System.out.println("You kept an illegal fish!");
+                                    System.out.println("You got a ticket and all of " 
+                                       + "your fish were confiscated!");
+                                 }
+                                 break;
+                              case "N":
+                                 System.out.println("You released your fish");
+                                 break;
+                              default:
+                                 System.out.println("***INVALID INPUT***");
+                                 System.out.println("Please enter a y or n");
+                                 break;
+                           }
+                        } else {
+                           System.out.println("Your fish got away!");
+                        }
+                     } catch (IndexOutOfBoundsException ie) { //fish has been removed already
+                        System.out.println("You didn't hook anything.");
+                     
                      }
-                  } catch (IndexOutOfBoundsException ie) { //fish has been removed already
-                     System.out.println("You didn't hook anything.");
+                     playerTurn++;
+                     method = false;
+                     player1 = true;
                   
-                  }
-                  playerTurn++;
-                  method = false;
-                  
-                  break;
-               case "2":
+                     break;
+                  case "2":
                   //user chose to view the fishing rules
-                  fishingRules();
-                  break;
-               case "3":
+                     fishingRules();
+                     break;
+                  case "3":
                   //user chose to view their sack of fish
-                  for (int i = 0; i < userSack1.size(); i++) {
-                     System.out.println((i + 1) + ": \n" + userSack1.get(i));
-                  }
-                  break;
-               case "4":
+                     for (int i = 0; i < userSack1.size(); i++) {
+                        System.out.println((i + 1) + ": \n" + userSack1.get(i));
+                     }
+                     break;
+                  case "4":
                   //user chose to release a fish
-                  System.out.println("Which fish would you like to release?");
-                  for (int i = 0; i < userSack1.size(); i++) {
-                     System.out.println((i + 1) + ": \n" + userSack1.get(i));
-                  }
-                  userIn = scan.nextLine();
-                  userIn = userIn.trim();
-                  chosenFish = (Integer.parseInt(userIn) - 1);
-                  ia = userSack1.get(chosenFish);
-                  userSack1.remove(chosenFish);
-                  fishPond.add(ia);
-                  System.out.println("You have released: \n" + ia);
-                  break;
-               default:
-                  System.out.println("***INVALID CHOICE***");
-                  System.out.println("Please enter a valid number");
-                  break;
-                  
-                 
-            } //end switch
-            
-            System.out.println("* Player 2 Choose:");
-            System.out.println("1. Cast out for a fish");
-            System.out.println("2. View fishing rules");
-            System.out.println("3. View sack of fish");
-            System.out.println("4. Throw back a fish in the sack");
-         
-            userIn = scan.nextLine();
-            userIn = userIn.trim();
-            
-            
-            switch(userIn) {
-                  //user chose to cast out for a fish
-               case "1":
-                  while (!method) {
-                     System.out.println("Pick your fishing method");
-                     System.out.println("a) pole");
-                     System.out.println("b) net");
-                     System.out.println("c) spear");
-                     System.out.println("d) trap");
-                     System.out.println("e) throw net");
-                  
+                     System.out.println("Which fish would you like to release?");
+                     for (int i = 0; i < userSack1.size(); i++) {
+                        System.out.println((i + 1) + ": \n" + userSack1.get(i));
+                     }
                      userIn = scan.nextLine();
-                     userIn = userIn.trim().toUpperCase();
+                     userIn = userIn.trim();
+                     chosenFish = (Integer.parseInt(userIn) - 1);
+                     ia = userSack1.get(chosenFish);
+                     userSack1.remove(chosenFish);
+                     fishPond.add(ia);
+                     System.out.println("You have released: \n" + ia);
+                     break;
+                  default:
+                     System.out.println("***INVALID CHOICE***");
+                     System.out.println("Please enter a valid number");
+                     break;
                   
-                     switch(userIn) {
-                        case "A":
-                           catchMethod = "pole";
-                           method = true;
-                           break;
-                        case "B":
-                           catchMethod = "net";
-                           method = true;
-                           break;
-                        case "C":
-                           catchMethod = "spear";
-                           method = true;
-                           break;
-                        case "D":
-                           catchMethod = "trap";
-                           method = true;
-                           break;
-                        case "E":
-                           catchMethod = "throw net";
-                           method = true;
-                           break;
-                        default:
-                           System.out.println("***INVALID INPUT***");
-                           System.out.println("Please choose a valid letter");
-                           break;
-                     }
-                  
-                  } //end while loop
-                  
-                  chosenFish = ranGen.nextInt(POND_SIZE);
-                  try {
-                     ia = fishPond.get(chosenFish);
-                  
-                     System.out.println("You have hooked a fish!");
-                     //randomly caught or not
-                     isCaught = ranGen.nextBoolean();
-                     if (isCaught) {
-                        System.out.println("You have caught a fish!");
-                        System.out.println(ia);
-                        System.out.println("Do you wish to keep your fish y/n");
+               } //end switch
+            } //end while
+            
+            while(!player2) {
+               System.out.println("* Player 2 Choose:");
+               System.out.println("1. Cast out for a fish");
+               System.out.println("2. View fishing rules");
+               System.out.println("3. View sack of fish");
+               System.out.println("4. Throw back a fish in the sack");
+            
+               userIn = scan.nextLine();
+               userIn = userIn.trim();
+            
+               switch(userIn) {
+                  //user chose to cast out for a fish
+                  case "1":
+                     while (!method) {
+                        System.out.println("Pick your fishing method");
+                        System.out.println("a) pole");
+                        System.out.println("b) net");
+                        System.out.println("c) spear");
+                        System.out.println("d) trap");
+                        System.out.println("e) throw net");
+                     
                         userIn = scan.nextLine();
                         userIn = userIn.trim().toUpperCase();
+                     
                         switch(userIn) {
-                           case "Y":      
-                              System.out.println("You have kept your fish");
-                              if (ia.isLegalSize()) {
-                                 System.out.println("Your fish is legal");
-                                 userSack1.add(ia);
-                                 fishPond.remove(chosenFish); //take fish out of the pond
-                              } else {
-                                 System.out.println("You kept an illegal fish!");
-                                 System.out.println("You got a ticket and all of " 
-                                     + "your fish were confiscated!");
-                              }
+                           case "A":
+                              catchMethod = "pole";
+                              method = true;
                               break;
-                           case "N":
-                              System.out.println("You released your fish");
+                           case "B":
+                              catchMethod = "net";
+                              method = true;
+                              break;
+                           case "C":
+                              catchMethod = "spear";
+                              method = true;
+                              break;
+                           case "D":
+                              catchMethod = "trap";
+                              method = true;
+                              break;
+                           case "E":
+                              catchMethod = "throw net";
+                              method = true;
                               break;
                            default:
                               System.out.println("***INVALID INPUT***");
-                              System.out.println("Please enter a y or n");
+                              System.out.println("Please choose a valid letter");
                               break;
                         }
-                     } else {
-                        System.out.println("Your fish got away!");
-                     }
-                  } catch (IndexOutOfBoundsException ie) { //fish has been removed already
-                     System.out.println("You didn't hook anything.");
+                     
+                     } //end while loop
                   
-                  }
-                  playerTurn++;
-                  method = false;
+                     chosenFish = ranGen.nextInt(POND_SIZE);
+                     try {
+                        ia = fishPond.get(chosenFish);
+                     
+                        System.out.println("You have hooked a fish!");
+                     //randomly caught or not
+                        isCaught = ranGen.nextBoolean();
+                        if (isCaught) {
+                           System.out.println("You have caught a fish!");
+                           System.out.println(ia);
+                           System.out.println("Do you wish to keep your fish y/n");
+                           userIn = scan.nextLine();
+                           userIn = userIn.trim().toUpperCase();
+                           switch(userIn) {
+                              case "Y":      
+                                 System.out.println("You have kept your fish");
+                                 if (ia.isLegalSize()) {
+                                    if (ia.isInSeason(month)) {
+                                       System.out.println("Your fish is legal");
+                                       userSack1.add(ia);
+                                       fishPond.remove(chosenFish); //take fish out of the pond
+                                    } else {
+                                       System.out.println("You kept an illegal fish!");
+                                       System.out.println("You got a ticket and all of " 
+                                          + "your fish were confiscated!");
+                                    }
+                                 } else {
+                                    System.out.println("You kept an illegal fish!");
+                                    System.out.println("You got a ticket and all of " 
+                                       + "your fish were confiscated!");
+                                 }
+                                 break;
+                              case "N":
+                                 System.out.println("You released your fish");
+                                 break;
+                              default:
+                                 System.out.println("***INVALID INPUT***");
+                                 System.out.println("Please enter a y or n");
+                                 break;
+                           }
+                        } else {
+                           System.out.println("Your fish got away!");
+                        }
+                     } catch (IndexOutOfBoundsException ie) { //fish has been removed already
+                        System.out.println("You didn't hook anything.");
+                     
+                     }
+                     playerTurn++;
+                     method = false;
+                     player2 = true;
                               
-                  break;
-               case "2":
+                     break;
+                  case "2":
                   //user chose to view the fishing rules
-                  fishingRules();
-                  break;
-               case "3":
+                     fishingRules();
+                     break;
+                  case "3":
                   //user chose to view their sack of fish
-                  for (int i = 0; i < userSack2.size(); i++) {
-                     System.out.println((i + 1) + ": \n" + userSack2.get(i));
-                  }
-                  break;
-               case "4":
+                     for (int i = 0; i < userSack2.size(); i++) {
+                        System.out.println((i + 1) + ": \n" + userSack2.get(i));
+                     }
+                     break;
+                  case "4":
                   //user chose to release a fish
-                  System.out.println("Which fish would you like to release?");
-                  for (int i = 0; i < userSack2.size(); i++) {
-                     System.out.println((i + 1) + ": \n" + userSack2.get(i));
-                  }
-                  userIn = scan.nextLine();
-                  userIn = userIn.trim();
-                  chosenFish = (Integer.parseInt(userIn) - 1);
-                  ia = userSack2.get(chosenFish);
-                  userSack2.remove(chosenFish);
-                  fishPond.add(ia);
-                  System.out.println("You have released: \n" + ia);
-                  break;
-               default:
-                  System.out.println("***INVALID CHOICE***");
-                  System.out.println("Please enter a valid number");
-                  break;
+                     System.out.println("Which fish would you like to release?");
+                     for (int i = 0; i < userSack2.size(); i++) {
+                        System.out.println((i + 1) + ": \n" + userSack2.get(i));
+                     }
+                     userIn = scan.nextLine();
+                     userIn = userIn.trim();
+                     chosenFish = (Integer.parseInt(userIn) - 1);
+                     ia = userSack2.get(chosenFish);
+                     userSack2.remove(chosenFish);
+                     fishPond.add(ia);
+                     System.out.println("You have released: \n" + ia);
+                     break;
+                  default:
+                     System.out.println("***INVALID CHOICE***");
+                     System.out.println("Please enter a valid number");
+                     break;
                   
                  
-            } //end switch
+               } //end switch
             
+            } //end while loop player2
+            player1 = false;
+            player2 = false;
          } //end players 3 turn loop
-         
          gameCount++;
       } //end game loop
       
@@ -471,6 +485,7 @@ public class FishingFrenzyBash {
       System.out.println("Valid catch methods: net or pole\n");
    
    }
+   
    
 }
          
