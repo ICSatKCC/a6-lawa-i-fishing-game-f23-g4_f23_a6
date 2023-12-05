@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
 * Fishing Frenzy Bash.
-* @authors Justin Kugiyama, Lewen Lin, & Yongjun Yu
+* @author Justin Kugiyama, Lewen Lin, & Yongjun Yu
 * @since 12/3/23
 */
 public class FishingFrenzyBash {
@@ -15,10 +15,10 @@ public class FishingFrenzyBash {
    /** Number of turns for player per month. */
    static final int PLAY = 3;
    /** 
-   * Fill pond method.
+   * Main method.
    * @param args not used
    */
-   public static void main (String[] args) {
+   public static void main(String[] args) {
       // ArrayList for fish pond
       ArrayList<FishableI_a> lokoI_a = new ArrayList<>();
       boolean fish = true;
@@ -37,12 +37,16 @@ public class FishingFrenzyBash {
       
    } //close main
    
+   /**
+   * Fill pond method.
+   * @return aList the fish pond
+   */
    public static ArrayList<FishableI_a> fillPond() {
       ArrayList<FishableI_a> aList = new ArrayList<>();
       
       //make 50 baby fish in the pond
       
-      for(int i = 0; i < 14; i++) {
+      for (int i = 0; i < 14; i++) {
          aList.add(new MoiLi_i());
          aList.add(new Oama());
          aList.add(new Pua_ama());
@@ -110,7 +114,7 @@ public class FishingFrenzyBash {
 
    
    /**
-   * lawaI'a
+   * lawaI'a.
    * @param fishPond arrayList of fish to be caught
    */
    public static void lawaI_a(ArrayList<FishableI_a> fishPond) {
@@ -122,12 +126,57 @@ public class FishingFrenzyBash {
       boolean isCaught = false;
       boolean isLegal = false;
       int gameCount = 0;
-      int playerTurn = 0;
+      int playerTurn = 1;
       String userIn;
+      String iTemp;
+      String month = "";
+      String catchMethod = "";
       
       while (gameCount < GAME_LENGTH) {
+         switch(gameCount) {
+            case 0:
+               month = "January";
+               break;
+            case 1:
+               month = "February";
+               break;
+            case 2:
+               month = "March";
+               break;
+            case 3:
+               month = "April";
+               break;
+            case 4:
+               month = "May";
+               break;
+            case 5:
+               month = "June";
+               break;
+            case 6:
+               month = "July";
+               break;
+            case 7:
+               month = "August";
+               break;
+            case 8:
+               month = "September";
+               break;
+            case 9:
+               month = "October";
+               break;
+            case 10:
+               month = "November";
+               break;
+            case 11:
+               month = "December";
+               break;
+            default:
+               System.out.println("Game Over!");
+               break;
+         }
+         System.out.println(month);
          
-         while (playerTurn < PLAY) {
+         for (int j = 0; j < 3; j++) {
             System.out.println("* Choose:");
             System.out.println("1. Cast out for a fish");
             System.out.println("2. View fishing rules");
@@ -140,6 +189,38 @@ public class FishingFrenzyBash {
             switch(userIn) {
                //user chose to cast out for a fish
                case "1":
+                  System.out.println("Pick your fishing method");
+                  System.out.println("a) pole");
+                  System.out.println("b) net");
+                  System.out.println("c) spear");
+                  System.out.println("d) trap");
+                  System.out.println("e) throw net");
+                  
+                  userIn = scan.nextLine();
+                  userIn = userIn.trim().toUpperCase();
+                  
+                  switch(userIn) {
+                     case "A":
+                        catchMethod = "pole";
+                        break;
+                     case "B":
+                        catchMethod = "net";
+                        break;
+                     case "C":
+                        catchMethod = "spear";
+                        break;
+                     case "D":
+                        catchMethod = "trap";
+                        break;
+                     case "E":
+                        catchMethod = "throw net";
+                        break;
+                     default:
+                        System.out.println("***INVALID INPUT***");
+                        System.out.println("Please choose a valid letter");
+                        break;
+                  }
+                  
                   chosenFish = ranGen.nextInt(POND_SIZE);
                   try {
                      ia = fishPond.get(chosenFish);
@@ -155,14 +236,15 @@ public class FishingFrenzyBash {
                         userIn = userIn.trim().toUpperCase();
                         switch(userIn) {
                            case "Y":      
-                              userSack.add(ia);
                               System.out.println("You have kept your fish");
-                              fishPond.remove(chosenFish); //take fish out of the pond
                               if (ia.isLegalSize()) {
                                  System.out.println("Your fish is legal");
+                                 userSack.add(ia);
+                                 fishPond.remove(chosenFish); //take fish out of the pond
                               } else {
                                  System.out.println("You kept an illegal fish!");
-                                 System.out.println("You got a ticket and all of your fish were confiscated!");
+                                 System.out.println("You got a ticket and all of " 
+                                     + "your fish were confiscated!");
                               }
                               break;
                            case "N":
@@ -185,16 +267,27 @@ public class FishingFrenzyBash {
                   break;
                case "2":
                   //user chose to view the fishing rules
-                  System.out.println("rules");
-                  playerTurn++;
+                  fishingRules();
                   break;
                case "3":
                   //user chose to view their sack of fish
-                  System.out.println(userSack);
+                  for (int i = 0; i < userSack.size(); i++) {
+                     System.out.println((i + 1) + ": \n" + userSack.get(i));
+                  }
                   break;
                case "4":
                   //user chose to release a fish
-                  System.out.println("remove fish");
+                  System.out.println("Which fish would you like to release?");
+                  for (int i = 0; i < userSack.size(); i++) {
+                     System.out.println((i + 1) + ": \n" + userSack.get(i));
+                  }
+                  userIn = scan.nextLine();
+                  userIn = userIn.trim();
+                  chosenFish = (Integer.parseInt(userIn) - 1);
+                  ia = userSack.get(chosenFish);
+                  userSack.remove(chosenFish);
+                  fishPond.add(ia);
+                  System.out.println("You have released: \n" + ia);
                   break;
                default:
                   System.out.println("***INVALID CHOICE***");
@@ -203,12 +296,38 @@ public class FishingFrenzyBash {
                   
                  
             } //end switch
-         
+            
          } //end player turn loop
-         gameCount++;  
+         gameCount++;
       } //end game loop
       
    } //close lawai_a method
+   
+   /**
+   * Fishing rules.
+   */
+   public static void fishingRules() {
+      System.out.println("Anae' family: ");
+      System.out.println("Legal size: 11 inches and above");
+      System.out.println("Season: April - November");
+      System.out.println("Valid catch methods: net or pole");
+      
+      System.out.println("Uhu family: ");
+      System.out.println("Legal size: 12 inches and above");
+      System.out.println("Season: year round");
+      System.out.println("Valid catch methods: throw net, spear, or pole");
+      
+      System.out.println("Weke family: ");
+      System.out.println("Legal size: no minimum legal size");
+      System.out.println("Season: year round");
+      System.out.println("Valid catch methods: net, trap, or pole");
+      
+      System.out.println("Moi family: ");
+      System.out.println("Legal size: 11 inches and above");
+      System.out.println("Season: January - May & September - December");
+      System.out.println("Valid catch methods: net or pole");
+   
+   }
    
 }
          
