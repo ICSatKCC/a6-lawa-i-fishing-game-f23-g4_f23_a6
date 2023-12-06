@@ -12,7 +12,7 @@ public class FishingFrenzyBash {
    /** Max size capacity for pond. */
    static final int POND_SIZE = 56;
    /** Game duration in months. */
-   static final int GAME_LENGTH = 2;
+   static final int GAME_LENGTH = 12;
    /** Number of turns for player per month. */
    static final int PLAY = 3;
    /** 
@@ -587,31 +587,30 @@ public class FishingFrenzyBash {
          gameCount++;
       } // end game loop
       System.out.println("\nGAME OVER!\n");
+      
       Collections.sort(userSack1, Collections.reverseOrder());
       
-      topLength1 = userSack1.get(0).getLength();
-      if (userSack1.size() > 1) {
-         topLength1 = topLength1 + userSack1.get(1).getLength();
-         if (userSack1.size() > 2) {
-            topLength1 = topLength1 + userSack1.get(2).getLength(); 
+      if (userSack1.size() > 0) {
+         topLength1 = userSack1.get(0).getLength();
+         if (userSack1.size() > 1) {
+            topLength1 = topLength1 + userSack1.get(1).getLength();
+            if (userSack1.size() > 2) {
+               topLength1 = topLength1 + userSack1.get(2).getLength(); 
+            }
          }
-      } else {
-         topLength1 = 0;
       }
       
       Collections.sort(userSack2, Collections.reverseOrder());
       
-      topLength1 = userSack1.get(0).getLength();
-      if (userSack1.size() > 1) {
-         topLength1 = topLength1 + userSack1.get(1).getLength();
-         if (userSack1.size() > 2) {
-            topLength1 = topLength1 + userSack1.get(2).getLength();
-         }
-           
-      } else {
-         topLength1 = 0;
-      }
-      
+      if (userSack2.size() > 0) {
+         topLength1 = userSack1.get(0).getLength();
+         if (userSack2.size() > 1) {
+            topLength2 = topLength2 + userSack2.get(1).getLength();
+            if (userSack2.size() > 2) {
+               topLength2 = topLength2 + userSack2.get(2).getLength();
+            }
+         }   
+      }      
       
       
       if (topLength1 > topLength2) {
