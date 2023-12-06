@@ -364,6 +364,7 @@ public class FishingFrenzyBash {
                            }
                            userIn = scan.nextLine();
                            userIn = userIn.trim();
+                          try{
                            chosenFish = (Integer.parseInt(userIn) - 1);
                            if (userSack1.get(chosenFish) != null) {
                               ia = userSack1.get(chosenFish);
@@ -374,7 +375,12 @@ public class FishingFrenzyBash {
                            } else {
                               System.out.println("This fish does not exist in you sack");
                            }
-                        }
+                        
+                        } catch (NumberFormatException nfe) {
+                    System.out.println("Please enter a integer number!!");
+                       }
+                   }
+
                      } else {
                         System.out.println("You currently do not have any fish\n");
                      }
@@ -544,7 +550,8 @@ public class FishingFrenzyBash {
                            }
                            userIn = scan.nextLine();
                            userIn = userIn.trim();
-                           chosenFish = (Integer.parseInt(userIn) - 1);
+                          try{
+                         chosenFish = (Integer.parseInt(userIn) - 1);
                            if (userSack2.get(chosenFish) != null) {
                               ia = userSack2.get(chosenFish);
                               userSack2.remove(chosenFish);
@@ -554,6 +561,10 @@ public class FishingFrenzyBash {
                            } else {
                               System.out.println("This fish does not exist in you sack");
                            }
+                             } catch (NumberFormatException nfe) {
+                    System.out.println("Please enter a integer number!!");
+                       }
+
                         }
                      } else {
                         System.out.println("You currently do not have any fish\n");
