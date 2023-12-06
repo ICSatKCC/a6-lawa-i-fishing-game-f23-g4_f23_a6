@@ -66,50 +66,50 @@ public class FishingFrenzyBash {
    */
    public static void growFish(ArrayList<FishableI_a> aList) {
       FishableI_a ia;
-      boolean debug = true; //turn printing on and off
+      boolean debug = false; //turn printing on and off
        
       //all fish in the pond
-         for (int i = 0; i < aList.size(); i++) {
+      for (int i = 0; i < aList.size(); i++) {
          //loop over array 
-            if (debug) {
-               System.out.println("==========================");
-               System.out.println("Feeding  the fish" + i);
-               System.out.println("==========================\n");
-            }
-            ia = aList.get(i);
-            if (debug) {
-               System.out.println(ia);
-            }
-            try { //must check for need to levelUp
+         if (debug) {
+            System.out.println("==========================");
+            System.out.println("Feeding  the fish" + i);
+            System.out.println("==========================\n");
+         }
+         ia = aList.get(i);
+         if (debug) {
+            System.out.println(ia);
+         }
+         try { //must check for need to levelUp
             //use EnglishName because doesn't change with size
-               if (ia.getEnglishName().equals("Striped Mullet")) {
-                  ia.eat("algae");
-               } else if (ia.getEnglishName().equals("Goatfish") 
+            if (ia.getEnglishName().equals("Striped Mullet")) {
+               ia.eat("algae");
+            } else if (ia.getEnglishName().equals("Goatfish") 
                      || ia.getEnglishName().equals("Yellowfin Goatfish") 
                      || ia.getEnglishName().equals("Square-spot Goatfish"))  {
-                  ia.eat("worms");
-               } else if (ia.getEnglishName().equals("Parrotfish")) {
-                  ia.eat("algae");
+               ia.eat("worms");
+            } else if (ia.getEnglishName().equals("Parrotfish")) {
+               ia.eat("algae");
                   
-               } else if (ia.getEnglishName().equals("Six-fingered threadfin")) {
-                  ia.eat("crustaceans");
+            } else if (ia.getEnglishName().equals("Six-fingered threadfin")) {
+               ia.eat("crustaceans");
                   
-               }
-               if (debug) {
-                  System.out.println("****After eat and grow: " + ia.getName() 
+            }
+            if (debug) {
+               System.out.println("****After eat and grow: " + ia.getName() 
                         + ": " + ia.getLength() + "\n");
-               }
-            } catch (FishSizeException fe) {
+            }
+         } catch (FishSizeException fe) {
                //need to level up
                
-               ia = ia.levelUp();
-               if (debug) {
-                  System.out.println(fe.getMessage());
-                  System.out.println("**** After levelUp: " + ia + "\n");
-               }
+            ia = ia.levelUp();
+            if (debug) {
+               System.out.println(fe.getMessage());
+               System.out.println("**** After levelUp: " + ia + "\n");
             }
-            aList.set(i, ia);
          }
+         aList.set(i, ia);
+      }
       
    
    
@@ -280,18 +280,25 @@ public class FishingFrenzyBash {
                                     System.out.println("You have kept your fish");
                                     if (ia.isLegalSize()) {
                                        if (ia.isInSeason(month)) {
-                                          // String c = ia.getCatchMethods().toString();
-                                       //                                           if (catchMethod.equals(c)) {
-                                          System.out.println("Your fish is legal");
-                                          userSack1.add(ia);
+                                          boolean methodLegal = false;
+                                          String a = catchMethod;;
+                                          for (String string : ia.getCatchMethods()) {
+                                             if (a.equals(string)) {
+                                                methodLegal = true;
+                                                break;
+                                             }
+                                          }
+                                          if (methodLegal == true) {
+                                             System.out.println("Your fish is legal");
+                                             userSack1.add(ia);
                                              //take fish out of the pond
-                                          fishPond.remove(chosenFish); 
-                                       //                                           } else {
-                                       //                                              System.out.println("You used an illegal catch method!");
-                                       //                                              System.out.println("You got a ticket and all of " 
-                                       //                                                  + "your fish were confiscated!");
-                                       //                                              userSack1.clear();
-                                       //                                           }
+                                             fishPond.remove(chosenFish); 
+                                          } else {
+                                             System.out.println("You used an illegal catch method!");
+                                             System.out.println("You got a ticket and all of " 
+                                                    + "your fish were confiscated!");
+                                             userSack1.clear();
+                                          }
                                        } else {
                                           System.out.println("This fish is not in season!");
                                           System.out.println("You got a ticket and all of " 
@@ -454,17 +461,25 @@ public class FishingFrenzyBash {
                                     System.out.println("You have kept your fish");
                                     if (ia.isLegalSize()) {
                                        if (ia.isInSeason(month)) {
-                                          // String c = ia.getCatchMethods().toString();
-                                       //                                           if (catchMethod.equals(c)) {
-                                          System.out.println("Your fish is legal");
-                                          userSack2.add(ia);
-                                          //take fish out of the pond
-                                          fishPond.remove(chosenFish); 
-                                       //                                           } else {
-                                       //                                              System.out.println("You used an illegal catch method!");
-                                       //                                              System.out.println("You got a ticket and all of " 
-                                       //                                                  + "your fish were confiscated!");
-                                       //                                           }
+                                          boolean methodLegal = false;
+                                          String a = catchMethod;;
+                                          for (String string : ia.getCatchMethods()) {
+                                             if (a.equals(string)) {
+                                                methodLegal = true;
+                                                break;
+                                             }
+                                          }
+                                          if (methodLegal == true) {
+                                             System.out.println("Your fish is legal");
+                                             userSack1.add(ia);
+                                             //take fish out of the pond
+                                             fishPond.remove(chosenFish); 
+                                          } else {
+                                             System.out.println("You used an illegal catch method!");
+                                             System.out.println("You got a ticket and all of " 
+                                                    + "your fish were confiscated!");
+                                             userSack1.clear();
+                                          }
                                        } else {
                                           System.out.println("This fish is not in season!");
                                           System.out.println("You got a ticket and all of " 
