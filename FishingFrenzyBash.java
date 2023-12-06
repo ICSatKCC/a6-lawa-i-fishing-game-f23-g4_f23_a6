@@ -12,7 +12,7 @@ public class FishingFrenzyBash {
    /** Max size capacity for pond. */
    static final int POND_SIZE = 56;
    /** Game duration in months. */
-   static final int GAME_LENGTH = 12;
+   static final int GAME_LENGTH = 2;
    /** Number of turns for player per month. */
    static final int PLAY = 3;
    /** 
@@ -586,29 +586,28 @@ public class FishingFrenzyBash {
          } //end players 3 turn loop
          gameCount++;
       } // end game loop
-      System.out.println("GAME OVER!");
+      System.out.println("\nGAME OVER!\n");
       Collections.sort(userSack1, Collections.reverseOrder());
-      if (userSack1.size() > 0) {
-         topLength1 = userSack1.get(0).getLength();
-         if (userSack1.size() > 1) {
-            topLength1 = topLength1 + userSack1.get(1).getLength();
-            if (userSack1.size() > 2) {
-               topLength1 = topLength1 + userSack1.get(2).getLength();
-            }
+      
+      topLength1 = userSack1.get(0).getLength();
+      if (userSack1.size() > 1) {
+         topLength1 = topLength1 + userSack1.get(1).getLength();
+         if (userSack1.size() > 2) {
+            topLength1 = topLength1 + userSack1.get(2).getLength(); 
          }
       } else {
          topLength1 = 0;
       }
       
       Collections.sort(userSack2, Collections.reverseOrder());
-      if (userSack1.size() > 0) {
-         topLength1 = userSack1.get(0).getLength();
-         if (userSack1.size() > 1) {
-            topLength1 = topLength1 + userSack1.get(1).getLength();
-            if (userSack1.size() > 2) {
-               topLength1 = topLength1 + userSack1.get(2).getLength();
-            }
-         }   
+      
+      topLength1 = userSack1.get(0).getLength();
+      if (userSack1.size() > 1) {
+         topLength1 = topLength1 + userSack1.get(1).getLength();
+         if (userSack1.size() > 2) {
+            topLength1 = topLength1 + userSack1.get(2).getLength();
+         }
+           
       } else {
          topLength1 = 0;
       }
@@ -617,16 +616,24 @@ public class FishingFrenzyBash {
       
       if (topLength1 > topLength2) {
          System.out.println("Player 1 won!");
-         System.out.println("Winning Player's top 3 fish:");
+         System.out.println("Winning Player's top fish:");
          System.out.println("1. " + userSack1.get(0));
-         System.out.println("2. " + userSack1.get(1));
-         System.out.println("3. " + userSack1.get(2));
+         if (userSack1.size() > 1) {
+            System.out.println("2. " + userSack1.get(1));
+            if (userSack1.size() > 2) {
+               System.out.println("3. " + userSack1.get(2));
+            }
+         }
       } else if (topLength1 < topLength2) {
          System.out.println("Player 2 won!");
-         System.out.println("Winning Player's top 3 fish:");
+         System.out.println("Winning Player's top fish:");
          System.out.println("1. " + userSack1.get(0));
-         System.out.println("2. " + userSack1.get(1));
-         System.out.println("3. " + userSack1.get(2));
+         if (userSack2.size() > 1) {
+            System.out.println("2. " + userSack1.get(1));
+            if (userSack2.size() > 2) {   
+               System.out.println("3. " + userSack1.get(2));
+            }
+         }   
       } else {
          System.out.println("It was a tie!");
       }
