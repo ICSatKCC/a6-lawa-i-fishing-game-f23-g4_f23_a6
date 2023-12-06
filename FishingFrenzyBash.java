@@ -286,7 +286,7 @@ public class FishingFrenzyBash {
                                                 break;
                                              }
                                           }
-                                          if (methodLegal == true) {
+                                          if (methodLegal) {
                                              System.out.println("Your fish is legal");
                                              userSack1.add(ia);
                                              //take fish out of the pond
@@ -346,7 +346,7 @@ public class FishingFrenzyBash {
                   //user chose to view their sack of fish
                      if (userSack1.size() > 0) {
                         for (int i = 0; i < userSack1.size(); i++) {
-                           System.out.println((i + 1) + ": \n" + userSack1.get(i));
+                           System.out.println((i + 1) + ": \n" + userSack1.get(i) + "\n");
                         }
                      } else {
                         System.out.println("You currently do not have any fish\n");
@@ -362,26 +362,29 @@ public class FishingFrenzyBash {
                            }
                            userIn = scan.nextLine();
                            userIn = userIn.trim();
-                          try{
-                           chosenFish = (Integer.parseInt(userIn) - 1);
-                           if (userSack1.get(chosenFish) != null) {
-                              ia = userSack1.get(chosenFish);
-                              userSack1.remove(chosenFish);
-                              fishPond.add(ia);
-                              System.out.println("You have released: \n" + ia);
-                              fish = true;
-                           } else {
-                              System.out.println("This fish does not exist in you sack");
+                           try {
+                              chosenFish = (Integer.parseInt(userIn) - 1);
+                              if (userSack1.get(chosenFish) != null) {
+                                 ia = userSack1.get(chosenFish);
+                                 userSack1.remove(chosenFish);
+                                 fishPond.add(ia);
+                                 System.out.println("You have released: \n" + ia + "\n");
+                                 fish = true;
+                              } else {
+                                 System.out.println("This fish does not exist in your sack");
+                              }
+                           
+                           } catch (NumberFormatException nfe) {
+                              System.out.println("Please enter an integer number!!");
+                           } catch (IndexOutOfBoundsException iobe) {
+                              System.out.println("Please a number in within your sack!");
                            }
-                        
-                        } catch (NumberFormatException nfe) {
-                    System.out.println("Please enter a integer number!!");
-                       }
-                   }
-
+                        }
+                     
                      } else {
                         System.out.println("You currently do not have any fish\n");
                      }
+                     break;
                   default:
                      System.out.println("***INVALID CHOICE***");
                      System.out.println("Please enter a valid number");
@@ -473,16 +476,16 @@ public class FishingFrenzyBash {
                                                 break;
                                              }
                                           }
-                                          if (methodLegal == true) {
+                                          if (methodLegal) {
                                              System.out.println("Your fish is legal");
-                                             userSack1.add(ia);
+                                             userSack2.add(ia);
                                              //take fish out of the pond
                                              fishPond.remove(chosenFish); 
                                           } else {
                                              System.out.println("You used an illegal catch method!");
                                              System.out.println("You got a ticket and all of " 
                                                     + "your fish were confiscated!");
-                                             userSack1.clear();
+                                             userSack2.clear();
                                           }
                                        } else {
                                           System.out.println("This fish is not in season!");
@@ -532,7 +535,7 @@ public class FishingFrenzyBash {
                   //user chose to view their sack of fish
                      if (userSack2.size() > 0) {
                         for (int i = 0; i < userSack2.size(); i++) {
-                           System.out.println((i + 1) + ": \n" + userSack2.get(i));
+                           System.out.println((i + 1) + ": \n" + userSack2.get(i) + "\n");
                         }
                      } else {
                         System.out.println("You currently do not have any fish\n");
@@ -548,21 +551,22 @@ public class FishingFrenzyBash {
                            }
                            userIn = scan.nextLine();
                            userIn = userIn.trim();
-                          try{
-                         chosenFish = (Integer.parseInt(userIn) - 1);
-                           if (userSack2.get(chosenFish) != null) {
-                              ia = userSack2.get(chosenFish);
-                              userSack2.remove(chosenFish);
-                              fishPond.add(ia);
-                              System.out.println("You have released: \n" + ia);
-                              fish = true;
-                           } else {
-                              System.out.println("This fish does not exist in you sack");
+                           try {
+                              chosenFish = (Integer.parseInt(userIn) - 1);
+                              if (userSack2.get(chosenFish) != null) {
+                                 ia = userSack2.get(chosenFish);
+                                 userSack2.remove(chosenFish);
+                                 fishPond.add(ia);
+                                 System.out.println("You have released: \n" + ia + "\n");
+                                 fish = true;
+                              } else {
+                                 System.out.println("This fish does not exist in you sack");
+                              }
+                           } catch (NumberFormatException nfe) {
+                              System.out.println("Please enter a integer number!!");
+                           } catch (IndexOutOfBoundsException iobe) {
+                              System.out.println("Please a number in within your sack!");
                            }
-                             } catch (NumberFormatException nfe) {
-                    System.out.println("Please enter a integer number!!");
-                       }
-
                         }
                      } else {
                         System.out.println("You currently do not have any fish\n");
@@ -655,4 +659,5 @@ public class FishingFrenzyBash {
       System.out.println("Valid catch methods: net or pole\n");
    
    }
-}
+   
+} //close class
