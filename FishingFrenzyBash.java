@@ -110,8 +110,6 @@ public class FishingFrenzyBash {
          }
          aList.set(i, ia);
       }
-      
-   
    
    } //close growFish method
 
@@ -391,7 +389,7 @@ public class FishingFrenzyBash {
                   
                } //end switch
             } //end while
-         
+           
             while (!player2) {
                System.out.println("* Player 2 Choose:");
                System.out.println("1. Cast out for a fish");
@@ -657,6 +655,4 @@ public class FishingFrenzyBash {
       System.out.println("Valid catch methods: net or pole\n");
    
    }
-   
-   
 }
