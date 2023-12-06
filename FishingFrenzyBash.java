@@ -32,7 +32,9 @@ public class FishingFrenzyBash {
    //       }
       
       //Simulating two years for fish growth
-      FishingFrenzyBash.growFish(lokoIa);
+      for (int m = 0; m < 24; m++) {
+         FishingFrenzyBash.growFish(lokoIa);
+      }
       //Open pond for fishing
       FishingFrenzyBash.lawaIa(lokoIa);
       //
@@ -64,8 +66,8 @@ public class FishingFrenzyBash {
    */
    public static void growFish(ArrayList<FishableI_a> aList) {
       FishableI_a ia;
-      boolean debug = false; //turn printing on and off
-      for (int m = 0; m < 24; m++) {
+      boolean debug = true; //turn printing on and off
+       
       //all fish in the pond
          for (int i = 0; i < aList.size(); i++) {
          //loop over array 
@@ -108,7 +110,6 @@ public class FishingFrenzyBash {
             }
             aList.set(i, ia);
          }
-      } // close m loop
       
    
    
@@ -145,39 +146,51 @@ public class FishingFrenzyBash {
          switch(gameCount) {
             case 0:
                month = "January";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 1:
                month = "February";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 2:
                month = "March";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 3:
                month = "April";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 4:
                month = "May";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 5:
                month = "June";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 6:
                month = "July";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 7:
                month = "August";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 8:
                month = "September";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 9:
                month = "October";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 10:
                month = "November";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 11:
                month = "December";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             default:
                System.out.println("Game Over!");
