@@ -337,7 +337,7 @@ public class FishingFrenzyBash {
                   case "4":
                      //user chose to release a fish
                      if (userSack1.size() > 0) {
-                        while(!fish) {
+                        while (!fish) {
                            System.out.println("Which fish would you like to release?");
                            for (int i = 0; i < userSack1.size(); i++) {
                               System.out.println((i + 1) + ": \n" + userSack1.get(i));
@@ -345,7 +345,7 @@ public class FishingFrenzyBash {
                            userIn = scan.nextLine();
                            userIn = userIn.trim();
                            chosenFish = (Integer.parseInt(userIn) - 1);
-                           if (userSack1.contains(chosenFish)) {
+                           if (userSack1.get(chosenFish) != null) {
                               ia = userSack1.get(chosenFish);
                               userSack1.remove(chosenFish);
                               fishPond.add(ia);
@@ -517,7 +517,7 @@ public class FishingFrenzyBash {
                            userIn = scan.nextLine();
                            userIn = userIn.trim();
                            chosenFish = (Integer.parseInt(userIn) - 1);
-                           if (userSack2.contains(chosenFish)) {
+                           if (userSack2.get(chosenFish) != null) {
                               ia = userSack2.get(chosenFish);
                               userSack2.remove(chosenFish);
                               fishPond.add(ia);
