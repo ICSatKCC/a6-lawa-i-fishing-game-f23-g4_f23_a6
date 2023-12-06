@@ -134,7 +134,6 @@ public class FishingFrenzyBash {
       boolean choice = false;
       boolean fish = false;
       int gameCount = 0;
-      int playerTurn = 1;
       double topLength1 = 0;
       double topLength2 = 0;
       String userIn;
@@ -142,7 +141,7 @@ public class FishingFrenzyBash {
       String month = "";
       String catchMethod = "";
       
-      while (gameCount < 3) {
+      while (gameCount < GAME_LENGTH) {
          switch(gameCount) {
             case 0:
                month = "January";
@@ -266,28 +265,31 @@ public class FishingFrenzyBash {
                               switch(userIn) {
                                  case "Y":      
                                     System.out.println("You have kept your fish");
-                                    if (true) {
+                                    if (ia.isLegalSize()) {
                                        if (ia.isInSeason(month)) {
-                                          String c = ia.getCatchMethods().toString();
-                                          if (catchMethod.equals(c)) {
-                                             System.out.println("Your fish is legal");
-                                             userSack1.add(ia);
+                                          // String c = ia.getCatchMethods().toString();
+                                       //                                           if (catchMethod.equals(c)) {
+                                          System.out.println("Your fish is legal");
+                                          userSack1.add(ia);
                                              //take fish out of the pond
-                                             fishPond.remove(chosenFish); 
-                                          } else {
-                                             System.out.println("You used an illegal catch method!");
-                                             System.out.println("You got a ticket and all of " 
-                                                 + "your fish were confiscated!");
-                                          }
+                                          fishPond.remove(chosenFish); 
+                                       //                                           } else {
+                                       //                                              System.out.println("You used an illegal catch method!");
+                                       //                                              System.out.println("You got a ticket and all of " 
+                                       //                                                  + "your fish were confiscated!");
+                                       //                                              userSack1.clear();
+                                       //                                           }
                                        } else {
                                           System.out.println("This fish is not in season!");
                                           System.out.println("You got a ticket and all of " 
                                                + "your fish were confiscated!");
+                                          userSack1.clear();
                                        }
                                     } else {
                                        System.out.println("This fish was not of length!");
                                        System.out.println("You got a ticket and all of " 
                                               + "your fish were confiscated!");
+                                       userSack1.clear();
                                     }
                                     choice = true;
                                     break;
@@ -313,7 +315,6 @@ public class FishingFrenzyBash {
                         System.out.println("You didn't hook anything.");
                      
                      }
-                     playerTurn++;
                      method = false;
                      player1 = true;
                      choice = false;
@@ -438,28 +439,30 @@ public class FishingFrenzyBash {
                               switch(userIn) {
                                  case "Y":      
                                     System.out.println("You have kept your fish");
-                                    if (true) {
+                                    if (ia.isLegalSize()) {
                                        if (ia.isInSeason(month)) {
-                                          String c = ia.getCatchMethods().toString();
-                                          if (catchMethod.equals(c)) {
-                                             System.out.println("Your fish is legal");
-                                             userSack2.add(ia);
+                                          // String c = ia.getCatchMethods().toString();
+                                       //                                           if (catchMethod.equals(c)) {
+                                          System.out.println("Your fish is legal");
+                                          userSack2.add(ia);
                                           //take fish out of the pond
-                                             fishPond.remove(chosenFish); 
-                                          } else {
-                                             System.out.println("You used an illegal catch method!");
-                                             System.out.println("You got a ticket and all of " 
-                                                 + "your fish were confiscated!");
-                                          }
+                                          fishPond.remove(chosenFish); 
+                                       //                                           } else {
+                                       //                                              System.out.println("You used an illegal catch method!");
+                                       //                                              System.out.println("You got a ticket and all of " 
+                                       //                                                  + "your fish were confiscated!");
+                                       //                                           }
                                        } else {
                                           System.out.println("This fish is not in season!");
                                           System.out.println("You got a ticket and all of " 
                                                + "your fish were confiscated!");
+                                          userSack2.clear();
                                        }
                                     } else {
                                        System.out.println("This fish was not of legal length!");
                                        System.out.println("You got a ticket and all of " 
                                               + "your fish were confiscated!");
+                                       userSack2.clear();
                                     }
                                     choice = true;
                                     break;
@@ -484,7 +487,6 @@ public class FishingFrenzyBash {
                         System.out.println("You didn't hook anything.");
                      
                      }
-                     playerTurn++;
                      method = false;
                      player2 = true;
                      choice = false;
@@ -562,7 +564,7 @@ public class FishingFrenzyBash {
          topLength1 = userSack1.get(0).getLength();
          if (userSack1.size() > 1) {
             topLength1 = topLength1 + userSack1.get(1).getLength();
-            if (userSack1.size () > 2) {
+            if (userSack1.size() > 2) {
                topLength1 = topLength1 + userSack1.get(2).getLength();
             }
          }   
