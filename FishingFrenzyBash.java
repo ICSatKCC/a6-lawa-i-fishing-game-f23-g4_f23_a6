@@ -32,7 +32,9 @@ public class FishingFrenzyBash {
    //       }
       
       //Simulating two years for fish growth
-      FishingFrenzyBash.growFish(lokoIa);
+      for (int m = 0; m < 24; m++) {
+         FishingFrenzyBash.growFish(lokoIa);
+      }
       //Open pond for fishing
       FishingFrenzyBash.lawaIa(lokoIa);
       //
@@ -65,52 +67,49 @@ public class FishingFrenzyBash {
    public static void growFish(ArrayList<FishableI_a> aList) {
       FishableI_a ia;
       boolean debug = false; //turn printing on and off
-      for (int m = 0; m < 24; m++) {
+       
       //all fish in the pond
-         for (int i = 0; i < aList.size(); i++) {
+      for (int i = 0; i < aList.size(); i++) {
          //loop over array 
-            if (debug) {
-               System.out.println("==========================");
-               System.out.println("Feeding  the fish" + i);
-               System.out.println("==========================\n");
-            }
-            ia = aList.get(i);
-            if (debug) {
-               System.out.println(ia);
-            }
-            try { //must check for need to levelUp
+         if (debug) {
+            System.out.println("==========================");
+            System.out.println("Feeding  the fish" + i);
+            System.out.println("==========================\n");
+         }
+         ia = aList.get(i);
+         if (debug) {
+            System.out.println(ia);
+         }
+         try { //must check for need to levelUp
             //use EnglishName because doesn't change with size
-               if (ia.getEnglishName().equals("Striped Mullet")) {
-                  ia.eat("algae");
-               } else if (ia.getEnglishName().equals("Goatfish") 
+            if (ia.getEnglishName().equals("Striped Mullet")) {
+               ia.eat("algae");
+            } else if (ia.getEnglishName().equals("Goatfish") 
                      || ia.getEnglishName().equals("Yellowfin Goatfish") 
                      || ia.getEnglishName().equals("Square-spot Goatfish"))  {
-                  ia.eat("worms");
-               } else if (ia.getEnglishName().equals("Parrotfish")) {
-                  ia.eat("algae");
+               ia.eat("worms");
+            } else if (ia.getEnglishName().equals("Parrotfish")) {
+               ia.eat("algae");
                   
-               } else if (ia.getEnglishName().equals("Six-fingered threadfin")) {
-                  ia.eat("crustaceans");
+            } else if (ia.getEnglishName().equals("Six-fingered threadfin")) {
+               ia.eat("crustaceans");
                   
-               }
-               if (debug) {
-                  System.out.println("****After eat and grow: " + ia.getName() 
+            }
+            if (debug) {
+               System.out.println("****After eat and grow: " + ia.getName() 
                         + ": " + ia.getLength() + "\n");
-               }
-            } catch (FishSizeException fe) {
+            }
+         } catch (FishSizeException fe) {
                //need to level up
                
-               ia = ia.levelUp();
-               if (debug) {
-                  System.out.println(fe.getMessage());
-                  System.out.println("**** After levelUp: " + ia + "\n");
-               }
+            ia = ia.levelUp();
+            if (debug) {
+               System.out.println(fe.getMessage());
+               System.out.println("**** After levelUp: " + ia + "\n");
             }
-            aList.set(i, ia);
          }
-      } // close m loop
-      
-   
+         aList.set(i, ia);
+      }
    
    } //close growFish method
 
@@ -132,8 +131,10 @@ public class FishingFrenzyBash {
       boolean player1 = false;
       boolean player2 = false;
       boolean choice = false;
+      boolean fish = false;
       int gameCount = 0;
-      int playerTurn = 1;
+      double topLength1 = 0;
+      double topLength2 = 0;
       String userIn;
       String iTemp;
       String month = "";
@@ -143,39 +144,51 @@ public class FishingFrenzyBash {
          switch(gameCount) {
             case 0:
                month = "January";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 1:
                month = "February";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 2:
                month = "March";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 3:
                month = "April";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 4:
                month = "May";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 5:
                month = "June";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 6:
                month = "July";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 7:
                month = "August";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 8:
                month = "September";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 9:
                month = "October";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 10:
                month = "November";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             case 11:
                month = "December";
+               FishingFrenzyBash.growFish(fishPond);
                break;
             default:
                System.out.println("Game Over!");
@@ -251,102 +264,75 @@ public class FishingFrenzyBash {
                      //randomly caught or not
                         isCaught = ranGen.nextBoolean();
                         if (isCaught) {
+                           System.out.println("You have caught a fish!");
+                           System.out.println(ia);
                            while (!choice) {
-                              System.out.println("You have caught a fish!");
-                              System.out.println(ia);
-                              System.out.println("Do you want to view rules again? y/n");
+                              
+                              System.out.println("Do you wish to keep your fish y/n?");
+                              System.out.println("* if you would like view the rules again enter r *");
                               userIn = scan.nextLine();
                               userIn = userIn.trim().toUpperCase();
                               
                               switch(userIn) {
-                                 case "Y":
-                                    fishingRules();
-                                    System.out.println("Do you wish to keep your fish y/n");
-                                    userIn = scan.nextLine();
-                                    userIn = userIn.trim().toUpperCase();
-                                    switch(userIn) {
-                                      case "Y":      
-                                        System.out.println("You have kept your fish");
-                                        if (ia.isLegalSize()) {
-                                           if (ia.isInSeason(month)) {
-                                              String c = ia.getCatchMethods().toString();
-                                              if (catchMethod.equals(c)) {
-                                                 System.out.println("Your fish is legal");
-                                                 userSack1.add(ia);
-                                                 //take fish out of the pond
-                                                 fishPond.remove(chosenFish); 
-                                              } else {
-                                                 System.out.println("You used an illegal catch method!");
-                                                 System.out.println("You got a ticket and all of " 
-                                                      + "your fish were confiscated!");
-                                              }
-                                           } else {
-                                              System.out.println("This fish is not in season!");
-                                              System.out.println("You got a ticket and all of " 
-                                                  + "your fish were confiscated!");
-                                           }
-                                        } else {
-                                           System.out.println("You kept an illegal fish!");
-                                           System.out.println("You got a ticket and all of " 
+                                 case "Y":      
+                                    System.out.println("You have kept your fish");
+                                    if (ia.isLegalSize()) {
+                                       if (ia.isInSeason(month)) {
+                                          boolean methodLegal = false;
+                                          String a = catchMethod;;
+                                          for (String string : ia.getCatchMethods()) {
+                                             if (a.equals(string)) {
+                                                methodLegal = true;
+                                                break;
+                                             }
+                                          }
+                                          if (methodLegal) {
+                                             System.out.println("Your fish is legal");
+                                             userSack1.add(ia);
+                                             //take fish out of the pond
+                                             fishPond.remove(chosenFish); 
+                                          } else {
+                                             System.out.println("You used an illegal catch method!");
+                                             System.out.println("You got a ticket and all of " 
+                                                    + "your fish were confiscated!");
+                                             userSack1.clear();
+                                          }
+                                       } else {
+                                          System.out.println("This fish is not in season!");
+                                          System.out.println("You got a ticket and all of " 
                                                + "your fish were confiscated!");
-                                        }
-                                        choice = true;
-
+                                          userSack1.clear();
+                                       }
+                                    } else {
+                                       System.out.println("This fish was not of length!");
+                                       System.out.println("You got a ticket and all of " 
+                                              + "your fish were confiscated!");
+                                       userSack1.clear();
+                                    }
+                                    choice = true;
                                     break;
+                                     
                                  case "N":
-                                    System.out.println("Do you wish to keep your fish y/n");
-                                    userIn = scan.nextLine();
-                                     userIn = userIn.trim().toUpperCase();
-
-                                    switch(userIn) {
-                                     case "Y":      
-                                        System.out.println("You have kept your fish");
-                                        if (ia.isLegalSize()) {
-                                           if (ia.isInSeason(month)) {
-                                              String c = ia.getCatchMethods().toString();
-                                              if (catchMethod.equals(c)) {
-                                                 System.out.println("Your fish is legal");
-                                                 userSack1.add(ia);
-                                                 //take fish out of the pond
-                                                 fishPond.remove(chosenFish); 
-                                              } else {
-                                                 System.out.println("You used an illegal catch method!");
-                                                 System.out.println("You got a ticket and all of " 
-                                                      + "your fish were confiscated!");
-                                              }
-                                           } else {
-                                              System.out.println("This fish is not in season!");
-                                              System.out.println("You got a ticket and all of " 
-                                                  + "your fish were confiscated!");
-                                           }
-                                        } else {
-                                           System.out.println("You kept an illegal fish!");
-                                           System.out.println("You got a ticket and all of " 
-                                               + "your fish were confiscated!");
-                                        }
-                                        choice = true;
-                                        break;
-                                     case "N":
-                                        System.out.println("You released your fish");
-                                        choice = true;
-                                          break;
-                                     default:
-                                        System.out.println("***INVALID INPUT***");
-                                        System.out.println("Please enter a y or n");
-                                        break;
-                                 } 
-                              } 
-                           }  
-                        }    
-                     }                                                      
-                        else {
+                                    System.out.println("You released your fish");
+                                    choice = true;
+                                    break;
+                                 case "R":
+                                    fishingRules();
+                                    break;
+                                 default:
+                                    System.out.println("\n***INVALID INPUT***");
+                                    System.out.println("Please enter a y, n, or r\n");
+                                    break; 
+                              
+                              }  
+                           }    
+                        } else {
                            System.out.println("Your fish got away!");
                         }
                      } catch (IndexOutOfBoundsException ie) { //fish has been removed already
                         System.out.println("You didn't hook anything.");
                      
                      }
-                     playerTurn++;
                      method = false;
                      player1 = true;
                      choice = false;
@@ -358,23 +344,46 @@ public class FishingFrenzyBash {
                      break;
                   case "3":
                   //user chose to view their sack of fish
-                     for (int i = 0; i < userSack1.size(); i++) {
-                        System.out.println((i + 1) + ": \n" + userSack1.get(i));
+                     if (userSack1.size() > 0) {
+                        for (int i = 0; i < userSack1.size(); i++) {
+                           System.out.println((i + 1) + ": \n" + userSack1.get(i) + "\n");
+                        }
+                     } else {
+                        System.out.println("You currently do not have any fish\n");
                      }
                      break;
                   case "4":
-                  //user chose to release a fish
-                     System.out.println("Which fish would you like to release?");
-                     for (int i = 0; i < userSack1.size(); i++) {
-                        System.out.println((i + 1) + ": \n" + userSack1.get(i));
+                     //user chose to release a fish
+                     if (userSack1.size() > 0) {
+                        while (!fish) {
+                           System.out.println("Which fish would you like to release?");
+                           for (int i = 0; i < userSack1.size(); i++) {
+                              System.out.println((i + 1) + ": \n" + userSack1.get(i));
+                           }
+                           userIn = scan.nextLine();
+                           userIn = userIn.trim();
+                           try {
+                              chosenFish = (Integer.parseInt(userIn) - 1);
+                              if (userSack1.get(chosenFish) != null) {
+                                 ia = userSack1.get(chosenFish);
+                                 userSack1.remove(chosenFish);
+                                 fishPond.add(ia);
+                                 System.out.println("You have released: \n" + ia + "\n");
+                                 fish = true;
+                              } else {
+                                 System.out.println("This fish does not exist in your sack");
+                              }
+                           
+                           } catch (NumberFormatException nfe) {
+                              System.out.println("Please enter an integer number!!");
+                           } catch (IndexOutOfBoundsException iobe) {
+                              System.out.println("Please a number in within your sack!");
+                           }
+                        }
+                     
+                     } else {
+                        System.out.println("You currently do not have any fish\n");
                      }
-                     userIn = scan.nextLine();
-                     userIn = userIn.trim();
-                     chosenFish = (Integer.parseInt(userIn) - 1);
-                     ia = userSack1.get(chosenFish);
-                     userSack1.remove(chosenFish);
-                     fishPond.add(ia);
-                     System.out.println("You have released: \n" + ia);
                      break;
                   default:
                      System.out.println("***INVALID CHOICE***");
@@ -383,7 +392,7 @@ public class FishingFrenzyBash {
                   
                } //end switch
             } //end while
-            }
+           
             while (!player2) {
                System.out.println("* Player 2 Choose:");
                System.out.println("1. Cast out for a fish");
@@ -445,112 +454,76 @@ public class FishingFrenzyBash {
                      //randomly caught or not
                         isCaught = ranGen.nextBoolean();
                         if (isCaught) {
+                           System.out.println("You have caught a fish!");
+                           System.out.println(ia);
                            while (!choice) {
-                              System.out.println("You have caught a fish!");
-                              System.out.println(ia);
-                              System.out.println("Do you want to view rules again? y/n");
+                           
+                              System.out.println("Do you wish to keep your fish y/n?");
+                              System.out.println("* if you would like view the rules again enter r *");
                               userIn = scan.nextLine();
                               userIn = userIn.trim().toUpperCase();
                               
                               switch(userIn) {
-                                 case "Y":
-                                    fishingRules();
-                                    System.out.println("Do you wish to keep your fish y/n");
-                                    userIn = scan.nextLine();
-                                    userIn = userIn.trim().toUpperCase();
-                                    switch(userIn) {
-                                     case "Y":      
-                                        System.out.println("You have kept your fish");
-                                        if (ia.isLegalSize()) {
-                                           if (ia.isInSeason(month)) {
-                                              String c = ia.getCatchMethods().toString();
-                                              if (catchMethod.equals(c)) {
-                                                 System.out.println("Your fish is legal");
-                                                 userSack1.add(ia);
-                                                 //take fish out of the pond
-                                                 fishPond.remove(chosenFish); 
-                                              } else {
-                                                 System.out.println("You used an illegal catch method!");
-                                                 System.out.println("You got a ticket and all of " 
-                                                      + "your fish were confiscated!");
-                                              }
-                                           } else {
-                                              System.out.println("This fish is not in season!");
-                                              System.out.println("You got a ticket and all of " 
-                                                  + "your fish were confiscated!");
-                                           }
-                                        } else {
-                                           System.out.println("You kept an illegal fish!");
-                                           System.out.println("You got a ticket and all of " 
+                                 case "Y":      
+                                    System.out.println("You have kept your fish");
+                                    if (ia.isLegalSize()) {
+                                       if (ia.isInSeason(month)) {
+                                          boolean methodLegal = false;
+                                          String a = catchMethod;;
+                                          for (String string : ia.getCatchMethods()) {
+                                             if (a.equals(string)) {
+                                                methodLegal = true;
+                                                break;
+                                             }
+                                          }
+                                          if (methodLegal) {
+                                             System.out.println("Your fish is legal");
+                                             userSack2.add(ia);
+                                             //take fish out of the pond
+                                             fishPond.remove(chosenFish); 
+                                          } else {
+                                             System.out.println("You used an illegal catch method!");
+                                             System.out.println("You got a ticket and all of " 
+                                                    + "your fish were confiscated!");
+                                             userSack2.clear();
+                                          }
+                                       } else {
+                                          System.out.println("This fish is not in season!");
+                                          System.out.println("You got a ticket and all of " 
                                                + "your fish were confiscated!");
-                                        }
-                                        choice = true;
-                                        break;
-                                     case "N":
-                                        System.out.println("You released your fish");
-                                        choice = true;
-                                          break;
-                                     default:
-                                        System.out.println("***INVALID INPUT***");
-                                        System.out.println("Please enter a y or n");
-                                        break;
-                                  }
+                                          userSack2.clear();
+                                       }
+                                    } else {
+                                       System.out.println("This fish was not of legal length!");
+                                       System.out.println("You got a ticket and all of " 
+                                              + "your fish were confiscated!");
+                                       userSack2.clear();
+                                    }
+                                    choice = true;
                                     break;
+                                     
                                  case "N":
-                                    System.out.println("Do you wish to keep your fish y/n");
-                                    userIn = scan.nextLine();
-                                    userIn = userIn.trim().toUpperCase();
-
-                                    switch(userIn) {
-                                     case "Y":      
-                                        System.out.println("You have kept your fish");
-                                        if (ia.isLegalSize()) {
-                                           if (ia.isInSeason(month)) {
-                                              String c = ia.getCatchMethods().toString();
-                                              if (catchMethod.equals(c)) {
-                                                 System.out.println("Your fish is legal");
-                                                 userSack1.add(ia);
-                                                 //take fish out of the pond
-                                                 fishPond.remove(chosenFish); 
-                                              } else {
-                                                 System.out.println("You used an illegal catch method!");
-                                                 System.out.println("You got a ticket and all of " 
-                                                      + "your fish were confiscated!");
-                                              }
-                                           } else {
-                                              System.out.println("This fish is not in season!");
-                                              System.out.println("You got a ticket and all of " 
-                                                  + "your fish were confiscated!");
-                                           }
-                                        } else {
-                                           System.out.println("You kept an illegal fish!");
-                                           System.out.println("You got a ticket and all of " 
-                                               + "your fish were confiscated!");
-                                        }
-                                        choice = true;
-                                        break;
-                                     case "N":
-                                        System.out.println("You released your fish");
-                                        choice = true;
-                                          break;
-                                     default:
-                                        System.out.println("***INVALID INPUT***");
-                                        System.out.println("Please enter a y or n");
-                                        break;
-                                  }
-                                  
-                           }
-                        } 
-                        }else {
+                                    System.out.println("You released your fish");
+                                    choice = true;
+                                    break;
+                                 case "R":
+                                    fishingRules();
+                                    break;
+                                 default:
+                                    System.out.println("\n***INVALID INPUT***");
+                                    System.out.println("Please enter a y, n, or r\n");
+                                    break;                                  
+                              }
+                           } 
+                        } else {
                            System.out.println("Your fish got away!");
                         }
                      } catch (IndexOutOfBoundsException ie) { //fish has been removed already
                         System.out.println("You didn't hook anything.");
                      
                      }
-                     playerTurn++;
                      method = false;
-                     player1 = true;
+                     player2 = true;
                      choice = false;
                   
                      break;
@@ -560,40 +533,118 @@ public class FishingFrenzyBash {
                      break;
                   case "3":
                   //user chose to view their sack of fish
-                     for (int i = 0; i < userSack2.size(); i++) {
-                        System.out.println((i + 1) + ": \n" + userSack2.get(i));
+                     if (userSack2.size() > 0) {
+                        for (int i = 0; i < userSack2.size(); i++) {
+                           System.out.println((i + 1) + ": \n" + userSack2.get(i) + "\n");
+                        }
+                     } else {
+                        System.out.println("You currently do not have any fish\n");
                      }
                      break;
                   case "4":
                   //user chose to release a fish
-                     System.out.println("Which fish would you like to release?");
-                     for (int i = 0; i < userSack2.size(); i++) {
-                        System.out.println((i + 1) + ": \n" + userSack2.get(i));
+                     if (userSack2.size() > 0) {
+                        while (!fish) {
+                           System.out.println("Which fish would you like to release?");
+                           for (int i = 0; i < userSack2.size(); i++) {
+                              System.out.println((i + 1) + ": \n" + userSack2.get(i));
+                           }
+                           userIn = scan.nextLine();
+                           userIn = userIn.trim();
+                           try {
+                              chosenFish = (Integer.parseInt(userIn) - 1);
+                              if (userSack2.get(chosenFish) != null) {
+                                 ia = userSack2.get(chosenFish);
+                                 userSack2.remove(chosenFish);
+                                 fishPond.add(ia);
+                                 System.out.println("You have released: \n" + ia + "\n");
+                                 fish = true;
+                              } else {
+                                 System.out.println("This fish does not exist in you sack");
+                              }
+                           } catch (NumberFormatException nfe) {
+                              System.out.println("Please enter a integer number!!");
+                           } catch (IndexOutOfBoundsException iobe) {
+                              System.out.println("Please a number in within your sack!");
+                           }
+                        }
+                     } else {
+                        System.out.println("You currently do not have any fish\n");
                      }
-                     userIn = scan.nextLine();
-                     userIn = userIn.trim();
-                     chosenFish = (Integer.parseInt(userIn) - 1);
-                     ia = userSack2.get(chosenFish);
-                     userSack2.remove(chosenFish);
-                     fishPond.add(ia);
-                     System.out.println("You have released: \n" + ia);
                      break;
                   default:
                      System.out.println("***INVALID CHOICE***");
                      System.out.println("Please enter a valid number");
                      break;
                   
-                 
                } //end switch
             
             } //end while loop player2
             player1 = false;
             player2 = false;
+            fish = false;
          } //end players 3 turn loop
          gameCount++;
-      } //end game loop
+      } // end game loop
+      System.out.println("\nGAME OVER!\n");
       
-   //close lawai_a method
+      Collections.sort(userSack1, Collections.reverseOrder());
+      try {
+         if (userSack1.size() > 0) {
+            topLength1 = userSack1.get(0).getLength();
+            if (userSack1.size() > 1) {
+               topLength1 = topLength1 + userSack1.get(1).getLength();
+               if (userSack1.size() > 2) {
+                  topLength1 = topLength1 + userSack1.get(2).getLength(); 
+               }
+            }
+         }
+      } catch (IndexOutOfBoundsException iobe) {
+         topLength1 = 0;
+      }
+      Collections.sort(userSack2, Collections.reverseOrder());
+      
+      try {
+         if (userSack2.size() > 0) {
+            topLength2 = userSack2.get(0).getLength();
+            if (userSack2.size() > 1) {
+               topLength2 = topLength2 + userSack2.get(1).getLength();
+               if (userSack2.size() > 2) {
+                  topLength2 = topLength2 + userSack2.get(2).getLength();
+               }
+            }   
+         }      
+      } catch (IndexOutOfBoundsException iobe) {
+         topLength2 = 0;
+      }
+         
+      if (topLength1 > topLength2) {
+         System.out.println("Player 1 won!");
+         System.out.println("Winning Player's top fish:");
+         System.out.println("1. " + userSack1.get(0));
+         if (userSack1.size() > 1) {
+            System.out.println("2. " + userSack1.get(1));
+            if (userSack1.size() > 2) {
+               System.out.println("3. " + userSack1.get(2));
+            }
+         }
+      } else if (topLength1 < topLength2) {
+         System.out.println("Player 2 won!");
+         System.out.println("Winning Player's top fish:");
+         System.out.println("1. " + userSack2.get(0));
+         if (userSack2.size() > 1) {
+            System.out.println("2. " + userSack2.get(1));
+            if (userSack2.size() > 2) {   
+               System.out.println("3. " + userSack2.get(2));
+            }
+         }   
+      } else {
+         System.out.println("It was a tie!");
+      }
+      
+      
+   } //close lawaI'a class
+      
    /**
    * Fishing rules.
    */
@@ -620,6 +671,4 @@ public class FishingFrenzyBash {
    
    }
    
-   
-}
-         
+} //close class
