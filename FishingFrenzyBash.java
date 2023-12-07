@@ -589,30 +589,35 @@ public class FishingFrenzyBash {
       System.out.println("\nGAME OVER!\n");
       
       Collections.sort(userSack1, Collections.reverseOrder());
-      
-      if (userSack1.size() > 0) {
-         topLength1 = userSack1.get(0).getLength();
-         if (userSack1.size() > 1) {
-            topLength1 = topLength1 + userSack1.get(1).getLength();
-            if (userSack1.size() > 2) {
-               topLength1 = topLength1 + userSack1.get(2).getLength(); 
+      try {
+         if (userSack1.size() > 0) {
+            topLength1 = userSack1.get(0).getLength();
+            if (userSack1.size() > 1) {
+               topLength1 = topLength1 + userSack1.get(1).getLength();
+               if (userSack1.size() > 2) {
+                  topLength1 = topLength1 + userSack1.get(2).getLength(); 
+               }
             }
          }
+      } catch (IndexOutOfBoundsException iobe) {
+         topLength1 = 0;
       }
-      
       Collections.sort(userSack2, Collections.reverseOrder());
       
-      if (userSack2.size() > 0) {
-         topLength1 = userSack1.get(0).getLength();
-         if (userSack2.size() > 1) {
-            topLength2 = topLength2 + userSack2.get(1).getLength();
-            if (userSack2.size() > 2) {
-               topLength2 = topLength2 + userSack2.get(2).getLength();
-            }
-         }   
-      }      
-      
-      
+      try {
+         if (userSack2.size() > 0) {
+            topLength2 = userSack2.get(0).getLength();
+            if (userSack2.size() > 1) {
+               topLength2 = topLength2 + userSack2.get(1).getLength();
+               if (userSack2.size() > 2) {
+                  topLength2 = topLength2 + userSack2.get(2).getLength();
+               }
+            }   
+         }      
+      } catch (IndexOutOfBoundsException iobe) {
+         topLength2 = 0;
+      }
+         
       if (topLength1 > topLength2) {
          System.out.println("Player 1 won!");
          System.out.println("Winning Player's top fish:");
@@ -626,11 +631,11 @@ public class FishingFrenzyBash {
       } else if (topLength1 < topLength2) {
          System.out.println("Player 2 won!");
          System.out.println("Winning Player's top fish:");
-         System.out.println("1. " + userSack1.get(0));
+         System.out.println("1. " + userSack2.get(0));
          if (userSack2.size() > 1) {
-            System.out.println("2. " + userSack1.get(1));
+            System.out.println("2. " + userSack2.get(1));
             if (userSack2.size() > 2) {   
-               System.out.println("3. " + userSack1.get(2));
+               System.out.println("3. " + userSack2.get(2));
             }
          }   
       } else {
