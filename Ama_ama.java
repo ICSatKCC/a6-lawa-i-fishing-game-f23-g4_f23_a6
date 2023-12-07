@@ -112,5 +112,14 @@ public class Ama_ama extends Kahaha {
    public Anae levelUp() {
       return new Anae(this.maxLength, this.sex);
    }
+   
+   /**
+   * Get catch methods.
+   * @return catchMethod, the valid catch methods
+   */
+   public String[] getCatchMethods() {
+      String [] catchMethods = {"net", "pole"};
+      return catchMethods;
+   }
       
 }
